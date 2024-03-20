@@ -589,6 +589,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Fusion;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Fusion would like to use your camera";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Fusion requires your location to find potential business individuals near you";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -625,6 +626,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Fusion;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Fusion would like to use your camera";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Fusion requires your location to find potential business individuals near you";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

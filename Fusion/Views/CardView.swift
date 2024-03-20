@@ -12,6 +12,7 @@ import FirebaseFirestore
 struct CardView: View, Identifiable {
     let id: UUID = UUID()
     let user: User
+    let defaultAvatar = "https://firebasestorage.googleapis.com:443/v0/b/fusion-eea9a.appspot.com/o/images%2F9xyjsqzPgBQiK0wd76E6zplxYM12%2F6b1a27b6_4f93_4fec_9d6b_b028297155de.jpeg?alt=media&token=20a33311-4fee-4e4b-b9f3-22f4f7611fc2"
     var cardDidTap: () -> Void
     
     @State private var isLoading = false
@@ -22,7 +23,7 @@ struct CardView: View, Identifiable {
             VStack(spacing: 0) {
                 ZStack(alignment: .top) {
                     VStack {
-                        AsyncImage(url: URL(string: user.avatar!)) { phase in
+                        AsyncImage(url: URL(string: user.avatar ?? defaultAvatar)) { phase in
                             switch phase {
                             case .empty:
                                 Image("loading")
@@ -81,13 +82,19 @@ struct CardView: View, Identifiable {
                             
                             Spacer()
                         }
-                        
-                        Text(user.bio ?? "")
-                            .font(.system(size: 14, design: .rounded))
-                            .foregroundStyle(.white)
-                            .fontWeight(.regular)
-                            .padding(.horizontal, 15)
-              
+                        HStack {
+                            Text(user.bio ?? "")
+                                .font(.system(size: 14, design: .rounded))
+                                .foregroundStyle(.white)
+                                .fontWeight(.regular)
+                                .padding(.horizontal, 15)
+                            Spacer()
+                            Text(user.distanceAway ?? "0.8 km away") //remove once finished
+                                .font(.system(size: 14, design: .rounded))
+                                .foregroundStyle(Color.textLightGrey)
+                                .fontWeight(.semibold)
+                                .padding(.trailing, 15)
+                        }
                     }
                     .padding(.bottom)
                     .frame(width: UIScreen.main.bounds.width * 0.9) //size of card

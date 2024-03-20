@@ -14,23 +14,36 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack { 
-            VStack {
-                CardStack(direction: LeftRight.direction, data: viewModel.users, id: \.id) { card, direction in
-                    
-                } content: { user, _, _ in
-                    CardView(user: user,cardDidTap: {
-                        viewModel.selectedUser = user
-                    })
+            ZStack {
+                VStack {
+                    CardStack(direction: LeftRight.direction, data: viewModel.users, id: \.id) { card, direction in
+                        
+                    } content: { user, _, _ in
+                        CardView(user: user,cardDidTap: {
+                            viewModel.selectedUser = user
+                        })
                         .frame(height: UIScreen.main.bounds.height * 0.75)
+                    }
+                    .scaledToFit()
+                    .frame( width: UIScreen.main.bounds.width * 0.9, alignment: .center)
+                    Spacer()
                 }
-                .scaledToFit()
-                .frame( width: UIScreen.main.bounds.width * 0.9, alignment: .center)
-                Spacer()
-            }
-            .navigationDestination(item: $viewModel.selectedUser) { user in
-                CardDetailView(user: user)
+                .navigationDestination(item: $viewModel.selectedUser) { user in
+                    CardDetailView(user: user)
+                }
+                if viewModel.isLoading { //loading feature
+                    ZStack{
+                        Color.loadingBackground.opacity(0.5).ignoresSafeArea()
+                        ProgressView()
+                    }
+                }
             }
         }
+        .onAppear(perform: {
+            viewModel.requestLocation()
+           // User.createMockLocationUsers()
+        })
+        
        // .frame(maxHeight: .infinity, alignment: .center)
     }
 }
