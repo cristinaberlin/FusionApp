@@ -95,7 +95,9 @@ class AuthViewModel: ObservableObject {
     }
     
     func fetchUser() async { //information I get back from database
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { 
+            self.currentUser = User.mockUsers[0]
+            return }
         print("did find id")
         let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument()
         print("did find snapshot \(snapshot)")

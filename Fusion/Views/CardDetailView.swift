@@ -10,46 +10,38 @@ import SwiftUI
 struct CardDetailView: View {
     let user: User
     var body: some View {
-        VStack{
-            AsyncImage(url: URL(string: user.avatar!)) { phase in 
-                // asynchronously loads and displays user's avatar url from database handling different loading states (empty, success, failure)
-                switch phase {
-                case .empty:
-                    Image("loading")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame( maxWidth: .infinity, maxHeight: .infinity)
-                      
-                       
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame( maxWidth: .infinity, maxHeight: .infinity)
-                       
-
-                case .failure:
-                    Image("loading")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame( maxWidth: .infinity, maxHeight: .infinity)
-                        
-                    
-                @unknown default:
-                    EmptyView()
-                        .frame(width: 60, height: 60)
-                }
-            }
-            .ignoresSafeArea()
-            VStack(alignment: .leading){
+        VStack(spacing:0){
+            AsyncImage(url: URL(string: user.avatar!)) { image in
+                image
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+                    .aspectRatio(contentMode: .fill)
+                                } placeholder: {
+                                    Image("loading")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                }
+                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+                                .ignoresSafeArea()
+            VStack(alignment: .leading, spacing: 0){
                 HStack {
                     Text(user.fullname)
                         .font(.system(size: 31,weight: .semibold)) //name
                     Spacer()
                 }
-                Text("\(user.businessField.title) \(user.company == nil ? "" : "@\(user.company!)" )")
-                    .font(.system(size: 17)) //business field
-                
+               HStack {
+                   Text("\(user.businessField.title) \(user.company == nil ? "" : "@\(user.company!)" )")
+                       .font(.system(size: 17)) //business field
+                   Spacer()
+                   Text(user.distanceAway ?? "0.8 km away") //capsule for km away
+                       .font(.system(size: 14, design: .rounded))
+                       .foregroundStyle(Color.textDarkGrey)
+                       .fontWeight(.semibold)
+                       .padding(.horizontal,10)
+                       .padding(.vertical, 5)
+                       .background(Color.textLightGrey.opacity(0.5))
+                       .clipShape(Capsule())
+               }
                 if let experience = user.experience { //user experience
                     Text(experience)
                         .font(.system(size: 15))
@@ -57,8 +49,9 @@ struct CardDetailView: View {
                 }
                 Spacer()
             }
-            .padding()
-            .frame(height: UIScreen.main.bounds.height * 0.4, alignment: .leading)
+           .offset(y: -45) //changes the position of image
+            .padding(.horizontal)
+            Spacer()
         }
     }
 }

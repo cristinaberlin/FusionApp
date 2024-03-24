@@ -53,6 +53,8 @@
 		239288622B20E57500F471BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239288612B20E57500F471BA /* ContentView.swift */; };
 		239288642B20E57700F471BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239288632B20E57700F471BA /* Assets.xcassets */; };
 		239288672B20E57700F471BA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239288662B20E57700F471BA /* Preview Assets.xcassets */; };
+		23DCFE1A2BAC81C7009A7AE0 /* MyToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DCFE192BAC81C7009A7AE0 /* MyToggleStyle.swift */; };
+		23DCFE1C2BAC81F8009A7AE0 /* StarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DCFE1B2BAC81F8009A7AE0 /* StarShape.swift */; };
 		23E499FD2B822D3B00B09548 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E499FC2B822D3B00B09548 /* ResetPasswordView.swift */; };
 		23E499FF2B82442F00B09548 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E499FE2B82442F00B09548 /* AuthError.swift */; };
 		23E49A032B824DCC00B09548 /* CustomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E49A022B824DCC00B09548 /* CustomLoadingView.swift */; };
@@ -108,6 +110,8 @@
 		239288612B20E57500F471BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		239288632B20E57700F471BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		239288662B20E57700F471BA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		23DCFE192BAC81C7009A7AE0 /* MyToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToggleStyle.swift; sourceTree = "<group>"; };
+		23DCFE1B2BAC81F8009A7AE0 /* StarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarShape.swift; sourceTree = "<group>"; };
 		23E499FC2B822D3B00B09548 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		23E499FE2B82442F00B09548 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		23E49A022B824DCC00B09548 /* CustomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoadingView.swift; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				20FA159E2B9B88B600C835F0 /* GeoFirestore */,
 				23E49A0B2B85143700B09548 /* CameraPicker.swift */,
 				23E49A0D2B85233F00B09548 /* ImageLoaderViewModel.swift */,
+				23DCFE192BAC81C7009A7AE0 /* MyToggleStyle.swift */,
+				23DCFE1B2BAC81F8009A7AE0 /* StarShape.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -443,9 +449,11 @@
 				23E49A032B824DCC00B09548 /* CustomLoadingView.swift in Sources */,
 				23E49A0C2B85143700B09548 /* CameraPicker.swift in Sources */,
 				23E49A162B8768B300B09548 /* PrimaryButton.swift in Sources */,
+				23DCFE1C2BAC81F8009A7AE0 /* StarShape.swift in Sources */,
 				234E659C2B3B226200C73C22 /* AuthViewModel.swift in Sources */,
 				20FA15832B9B871700C835F0 /* GeoFirestore.swift in Sources */,
 				23E49A142B8766AD00B09548 /* EditBioViewModel.swift in Sources */,
+				23DCFE1A2BAC81C7009A7AE0 /* MyToggleStyle.swift in Sources */,
 				20FA15982B9B884F00C835F0 /* GFUtils.m in Sources */,
 				20FA15972B9B884F00C835F0 /* GFQuery.m in Sources */,
 			);

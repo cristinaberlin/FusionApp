@@ -20,6 +20,7 @@ struct CardView: View, Identifiable {
     var body: some View {
         
         ZStack {
+            Color.modeBackground.ignoresSafeArea()
             VStack(spacing: 0) {
                 ZStack(alignment: .top) {
                     VStack {
@@ -40,12 +41,12 @@ struct CardView: View, Identifiable {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .cornerRadius(20)
-                                    .frame(width: 350)
+                                    .frame(width: 355)
                                     .frame(maxHeight: .infinity)
                                     .clipped()
                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 20))
                                 
-                            case .failure:
+                            case .failure: //if image doesnt load, it shows image loading
                                 Image("loading")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -89,7 +90,7 @@ struct CardView: View, Identifiable {
                                 .fontWeight(.regular)
                                 .padding(.horizontal, 15)
                             Spacer()
-                            Text(user.distanceAway ?? "0.8 km away") //remove once finished
+                            Text(user.distanceAway ?? "") 
                                 .font(.system(size: 14, design: .rounded))
                                 .foregroundStyle(Color.textLightGrey)
                                 .fontWeight(.semibold)

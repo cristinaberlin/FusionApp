@@ -12,6 +12,7 @@ struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
     @StateObject private var imageLoaderViewModel = ImageLoaderViewModel()
     @State private var businessFieldSelection: BusinessFields = .marketing //default that is shown in picker if no prior selection
+    @AppStorage("darkMode") var darkMode = false //boolean that stores the dark mode theme of the app
     
     var body: some View {
         NavigationStack { //allows user to navigate between pages
@@ -95,7 +96,7 @@ struct ProfileView: View {
 
                             }
                             
-                            Section("General") {
+                            Section("General") { //here I have version of the app and darkmode/lightmode switch
                                 HStack {
                                     SettingsRowView(imageName: "gear.circle",
                                                     title: "Version",
@@ -107,6 +108,18 @@ struct ProfileView: View {
                                         .font(.system(size: 14))
                                         .foregroundColor(.gray)
                                 }
+                                HStack {
+                                    Text(darkMode ? "Light Mode" : "Dark Mode")
+                                    Spacer()
+                                    Toggle("", isOn: $darkMode.animation(.easeInOut))
+                                        .frame(width: 90, height: 10, alignment: .top)
+                                        .toggleStyle(MyToggleStyle())
+                                        .padding(.bottom, 16)
+                                                   
+                                    
+                                  
+                                }
+                                .frame(height:50)
                             }
                             Section("Account") { //buttons for signing out and deleting account
                                 Button {
