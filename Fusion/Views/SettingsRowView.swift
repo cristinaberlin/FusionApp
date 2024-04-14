@@ -22,6 +22,7 @@ struct SettingsRowView: View {
             Text(title)
                 .font(.system(size: 15))
                 .foregroundColor(.black)
+            Spacer()
         }
     }
 }

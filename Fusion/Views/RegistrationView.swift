@@ -9,12 +9,9 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    @State private var email = ""
-    @State private var fullname = ""
-    @State private var businessFieldSelection: BusinessFields = .marketing //default that is shown in picker if no prior selection
-    @State private var password = ""
-    @State private var confirmPassword = ""
-    @EnvironmentObject var viewModel: AuthViewModel
+    @StateObject var viewModel = RegistrationViewModel()
+    @EnvironmentObject var sessionManager: SessionManager
+   // @EnvironmentObject var viewModel: AuthViewModel
     @Environment(\.dismiss) var dismiss
     
     
@@ -29,34 +26,34 @@ struct RegistrationView: View {
             
             //form fields
             VStack(spacing:24 ) {
-                InputView(text: $email,
+                InputView(text: $viewModel.email,
                           title: "Email Address",
                           placeholder: "name@example.com")
                 .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                 
-                InputView(text: $fullname,
+                InputView(text: $viewModel.fullname,
                           title: "Full Name",
                           placeholder: "Enter your name")
                 
-                Picker("Business Picker", selection: $businessFieldSelection) {
+                Picker("Business Picker", selection: $viewModel.businessFieldSelection) {
                     ForEach(BusinessFields.allCases) { businessField in
                         Text(businessField.title)
                     }
                 }
                 
-                InputView(text: $password,
+                InputView(text: $viewModel.password,
                           title: "Password",
                           placeholder: "Enter your password",
                           isSecureField: true)
                 
                 ZStack(alignment: .trailing) {
-                    InputView(text: $confirmPassword,
+                    InputView(text: $viewModel.confirmPassword,
                               title: "Confirm Password",
                               placeholder: "Confirm your password",
                               isSecureField: true)
                     
-                    if !password.isEmpty && !confirmPassword.isEmpty { //making sure both fields have text and as filling out form, If both fields are equal a checkmark will show if not an xmark will appear.
-                        if password == confirmPassword {
+                    if !viewModel.password.isEmpty && !viewModel.confirmPassword.isEmpty { //making sure both fields have text and as filling out form, If both fields are equal a checkmark will show if not an xmark will appear.
+                        if viewModel.password == viewModel.confirmPassword {
                             Image(systemName: "checkmark.circle.fill")
                                 .imageScale(.large)
                                 .fontWeight(.bold)
@@ -78,10 +75,10 @@ struct RegistrationView: View {
             Button {
                 print("Sign User Up..") //prints in console
                 Task{
-                    try await viewModel.createUser(withEmail: email,
-                                                   password: password,
-                                                   fullname:fullname,
-                                                   businessField: businessFieldSelection )
+                    let result = try await viewModel.createUser()
+                    if result {
+                        sessionManager.sessionState = .loggedIn
+                    }
                 }
                
             } label: {
@@ -95,8 +92,8 @@ struct RegistrationView: View {
                        height: 48 )
             }
             .background(Color(.systemBlue))
-            .disabled(!formIsValid)
-            .opacity(formIsValid ? 1.0 : 0.5) //gives button faded look if the form isint valid
+            .disabled(!(viewModel.isEmailValid() && viewModel.isPasswordValid() && viewModel.isFullnameValid()  ))
+            .opacity((viewModel.isEmailValid() && viewModel.isPasswordValid() && viewModel.isFullnameValid()) ? 1.0 : 0.5) //gives button faded look if the form isint valid
             .cornerRadius(10)
             .padding(.top, 24)
             
@@ -116,22 +113,9 @@ struct RegistrationView: View {
     }
 }
 
-//MARK: - Authentication Form Protocol
-
-extension RegistrationView: AuthenticationFormProtocol { //Authentication form protocol checks these password conditions
-    var formIsValid: Bool {
-        return !email.isEmpty
-        && email.contains("@")
-        && !password.isEmpty
-        && password.count > 5
-        && confirmPassword == password
-        && !fullname.isEmpty
-    }
-}
-
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
         RegistrationView()
-            .environmentObject(AuthViewModel())
+            .environmentObject(SessionManager())
     }
 }

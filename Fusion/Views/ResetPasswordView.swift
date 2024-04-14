@@ -3,7 +3,7 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 10/02/2024.
-// User will be brought to this page for when they forget email and can input email in tectbox
+// User will be brought to this page for when they forget email and can input email in textbox
 
 import SwiftUI
 

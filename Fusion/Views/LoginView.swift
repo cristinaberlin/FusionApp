@@ -10,9 +10,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email = ""
-    @State private var password = ""
-    @EnvironmentObject var viewModel: AuthViewModel
+    @StateObject var viewModel = LoginViewModel()
+    @EnvironmentObject var sessionManager: SessionManager
     
     var body: some View {
         NavigationStack { //  Navigation stack to move back and forth between pages
@@ -26,12 +25,12 @@ struct LoginView: View {
                 
                 //form fields
                 VStack(spacing:24 ) {
-                    InputView(text: $email,
+                    InputView(text: $viewModel.email,
                               title: "Email Address",
                               placeholder: "name@example.com")
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     
-                    InputView(text: $password,
+                    InputView(text: $viewModel.password,
                               title: "Password",
                               placeholder: "Enter your password",
                               isSecureField: true)
@@ -55,7 +54,10 @@ struct LoginView: View {
                 //sign in button
                 Button {
                     Task{
-                        try await  viewModel.signIn(withEmail: email, password: password)
+                       let result = try await viewModel.signIn()
+                        if result {
+                            sessionManager.sessionState = .loggedIn
+                        }
                     }
                     
                 } label: {
@@ -66,8 +68,8 @@ struct LoginView: View {
 
                 }
                 .buttonStyle(PrimaryButton())
-                .disabled(!formIsValid)
-                .opacity(formIsValid ? 1.0 : 0.5) //gives button faded look if the form isint valid
+                .disabled(!(viewModel.isEmailValid() && viewModel.isPasswordValid() ))
+                .opacity((viewModel.isEmailValid() && viewModel.isPasswordValid() ) ? 1.0 : 0.5) //gives button faded look if the form isint valid
                
                 
                 Spacer()
@@ -98,22 +100,10 @@ struct LoginView: View {
       }
    }
 
-
-//MARK: - Authentication Form Protocol
-
-extension LoginView: AuthenticationFormProtocol { //Authentication form protocol checks these password conditions
-    var formIsValid: Bool {
-        return !email.isEmpty
-        && email.contains("@")
-        && !password.isEmpty
-        && password.count > 5
-    }
-}
-
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            .environmentObject(AuthViewModel())
+            .environmentObject(SessionManager())
     }
 }
 

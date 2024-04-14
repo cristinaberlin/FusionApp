@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var sessionManager: SessionManager
     @StateObject private var viewModel = ProfileViewModel()
     @StateObject private var imageLoaderViewModel = ImageLoaderViewModel()
     @State private var businessFieldSelection: BusinessFields = .marketing //default that is shown in picker if no prior selection
@@ -18,7 +18,7 @@ struct ProfileView: View {
         NavigationStack { //allows user to navigate between pages
             ZStack {
                 VStack {
-                    if let user = authViewModel.currentUser {
+                    if let user = sessionManager.currentUser {
                         List {
                             Section { //first section, displays initials, image, name and email
                                 HStack {
@@ -123,8 +123,9 @@ struct ProfileView: View {
                             }
                             Section("Account") { //buttons for signing out and deleting account
                                 Button {
-                                    authViewModel.signout()
+                                    sessionManager.signout()
                                 } label: {
+                                Text("Sign out")
                                     SettingsRowView(imageName: "arrow.left.circle.fill",
                                                     title: "Sign Out",
                                                     tintColor: Color(.systemRed))
@@ -132,7 +133,7 @@ struct ProfileView: View {
                                 
                                 Button {
                                     Task {
-                                        try await authViewModel.deleteAccount()
+                                        try await sessionManager.deleteAccount()
                                     }
                                 } label: {
                                     SettingsRowView(imageName: "xmark.circle.fill",
@@ -146,7 +147,7 @@ struct ProfileView: View {
                     
                 }
                
-                if authViewModel.isLoading {
+                if sessionManager.isLoading {
                     CustomProgressView()
                 }
                 if viewModel.uploadIsActive {
@@ -183,7 +184,7 @@ struct ProfileView: View {
             }, message: {
                 Text(viewModel.alertMessage)
             })
-            .onChange(of: authViewModel.currentUser, { oldValue, newValue in
+            .onChange(of: sessionManager.currentUser, { oldValue, newValue in
                 if let user = newValue
                 {
                     if let avatarurl = user.avatar{
@@ -195,13 +196,13 @@ struct ProfileView: View {
                 }
             })
             .onAppear(perform: {
-                if let avatarurl = authViewModel.currentUser?.avatar{
+                if let avatarurl = sessionManager.currentUser?.avatar{
                     viewModel.avatar = URL(string: avatarurl)
                 }
-                if let bio = authViewModel.currentUser?.bio {
+                if let bio = sessionManager.currentUser?.bio {
                     viewModel.bio = bio
                 }
-                if let experience = authViewModel.currentUser?.experience {
+                if let experience = sessionManager.currentUser?.experience {
                     viewModel.experience = experience
                 }
             })
@@ -212,7 +213,7 @@ struct ProfileView: View {
                     Text("Take a Picture")
                 }
                 Button {
-                    viewModel.showLibrary = true //user can upload an image
+                    viewModel.showLibrary = true //user can upload an image from library
                 } label: {
                     Text("Upload from Library")
                     
@@ -235,7 +236,7 @@ struct ProfileView: View {
             
             .onChange(of: businessFieldSelection,
                       { oldValue, newValue in
-                if let user = authViewModel.currentUser {
+                if let user = sessionManager.currentUser {
                     guard user.businessField != newValue else {
                         return
                     }
@@ -243,14 +244,14 @@ struct ProfileView: View {
                 }
             })
             
-            .onChange(of: authViewModel.currentUser, { oldValue, newValue in //monitors for new change, remembers it and passes info through user
+            .onChange(of: sessionManager.currentUser, { oldValue, newValue in //monitors for new change, remembers it and passes info through user
                 if newValue != nil {
                     businessFieldSelection = newValue!.businessField
                 }
         })
         }
         .onAppear {
-            if let company = authViewModel.currentUser?.company {
+            if let company = sessionManager.currentUser?.company {
                 viewModel.company = company
             }
         }
@@ -262,7 +263,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
-            .environmentObject(AuthViewModel())
+            .environmentObject(SessionManager(currentUser: User(id: "1", fullname: "Amelia B", email: "test2@icloud.com", businessField: .finance))) //mocking user to be able to see it in the preview
     }
 }
 

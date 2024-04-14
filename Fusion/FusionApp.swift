@@ -20,37 +20,47 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct FusionApp: App {
-   @StateObject var viewModel = AuthViewModel() //initialised here and used throughout the app
+   @StateObject var sessionManager = SessionManager() //initialised here and used throughout the app
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
       
     var body: some Scene {
         WindowGroup {
-            
-            if viewModel.userSession != nil {
-                //If there is a user session the user will be sent to profile view if not they will be directed to login view
+            switch sessionManager.sessionState {
+            case .loggedOut:
+                LoginView()
+                    .environmentObject(sessionManager)
+            case .loggedIn:
                 TabView {
                     HomeView()
                         .tabItem {
                             VStack{
                                 Image(systemName: "house")
+                                Text("Home")
+                            }
+                        }
+                    MessagingView()
+                        .tabItem {
+                            VStack{
+                                Image(systemName: "bubble")
+                                Text("Messages")
                             }
                         }
                     ProfileView()
                         .tabItem {
                             VStack{
                                 Image(systemName: "person")
+                                Text("Account")
                             }
                         }
                     
                 }
-                
-            } else {
-                LoginView()
+                .environmentObject(sessionManager)
             }
+               
                 
         }
-        .environmentObject(viewModel)
+        
     }
 }
 
