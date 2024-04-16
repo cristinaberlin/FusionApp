@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MessagingView: View {
     @StateObject var viewModel = MessagingViewModel()
+    @EnvironmentObject var sessionManager: SessionManager
     
     var body: some View {
         NavigationStack {
@@ -19,6 +20,17 @@ struct MessagingView: View {
             }
             .navigationTitle("Messages")
         }
+        .onChange(of: sessionManager.sessionState, { oldValue, newValue in
+            if newValue == .loggedOut { //if user logs out, the listener is turned off and when they log back in the same listener kicks in
+                viewModel.listenerRegistration?.remove()
+                viewModel.listenerRegistration = nil
+            }
+            else {
+                viewModel.getThreads()
+            }
+                
+                
+        })
         .onAppear(perform: {
             viewModel.getThreads()
         })

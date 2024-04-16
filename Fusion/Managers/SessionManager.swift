@@ -4,7 +4,7 @@
 //
 //  Created by Cristina Berlinschi on 29/03/2024.
 //
-// Manages what state the user will be in either logged in or out
+// Manages what state the user will be in either logged in or out and changes
 
 import Foundation
 import SwiftUI

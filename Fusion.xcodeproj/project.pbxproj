@@ -54,6 +54,7 @@
 		238051A72BCBEB9F0083DC89 /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051A62BCBEB9F0083DC89 /* MessageRowView.swift */; };
 		238051A92BCBEF100083DC89 /* MessagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051A82BCBEF100083DC89 /* MessagingViewModel.swift */; };
 		238051AB2BCBFAFC0083DC89 /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051AA2BCBFAFC0083DC89 /* MessageThread.swift */; };
+		238051AD2BCD7D6A0083DC89 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051AC2BCD7D6A0083DC89 /* ChatView.swift */; };
 		239288602B20E57500F471BA /* FusionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2392885F2B20E57500F471BA /* FusionApp.swift */; };
 		239288622B20E57500F471BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239288612B20E57500F471BA /* ContentView.swift */; };
 		239288642B20E57700F471BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239288632B20E57700F471BA /* Assets.xcassets */; };
@@ -134,6 +135,7 @@
 		238051A62BCBEB9F0083DC89 /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 		238051A82BCBEF100083DC89 /* MessagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingViewModel.swift; sourceTree = "<group>"; };
 		238051AA2BCBFAFC0083DC89 /* MessageThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
+		238051AC2BCD7D6A0083DC89 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		2392885C2B20E57500F471BA /* Fusion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fusion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2392885F2B20E57500F471BA /* FusionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FusionApp.swift; sourceTree = "<group>"; };
 		239288612B20E57500F471BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				23E49A272B97646D00B09548 /* EditExperienceView.swift */,
 				238051A42BCABDC30083DC89 /* MessagingView.swift */,
 				238051A62BCBEB9F0083DC89 /* MessageRowView.swift */,
+				238051AC2BCD7D6A0083DC89 /* ChatView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 			files = (
 				239288622B20E57500F471BA /* ContentView.swift in Sources */,
 				238051A92BCBEF100083DC89 /* MessagingViewModel.swift in Sources */,
+				238051AD2BCD7D6A0083DC89 /* ChatView.swift in Sources */,
 				23E49A1F2B88F61B00B09548 /* HomeViewModel.swift in Sources */,
 				20FA159A2B9B884F00C835F0 /* GFGeoHashQuery.m in Sources */,
 				238051A52BCABDC30083DC89 /* MessagingView.swift in Sources */,

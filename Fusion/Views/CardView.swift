@@ -3,7 +3,7 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 23/02/2024.
-// I used a library for the cards https://github.com/dadalar/SwiftUI-CardStackView
+// Library for the cards https://github.com/dadalar/SwiftUI-CardStackView
 
 import SwiftUI
 import FirebaseAuth

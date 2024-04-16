@@ -45,8 +45,8 @@ class HomeViewModel: NSObject, ObservableObject {
         if let avatar = currentUser.avatar {
             userData["avatar"] = avatar
         }
-        Firestore.firestore().collection("users").document(userID).collection("messageThreads").document(ourUserID).setData(otherUserData)
-        Firestore.firestore().collection("users").document(ourUserID).collection("messageThreads").document(userID).setData(userData)
+        Firestore.firestore().collection("users").document(userID).collection("messageThreads").document(ourUserID).setData(userData)
+        Firestore.firestore().collection("users").document(ourUserID).collection("messageThreads").document(userID).setData(otherUserData)
     }
     
     func requestLocation() {
