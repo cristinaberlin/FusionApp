@@ -12,6 +12,7 @@ import FirebaseAuth
 class MessagingViewModel: ObservableObject {
     @Published var users: [User] = User.mockUsers
     @Published var messageThreads: [MessageThread] = []
+    @Published var selectedMessageThread: MessageThread?
     var listenerRegistration: ListenerRegistration?
     
     func getThreads() {

@@ -32,13 +32,7 @@ struct FusionApp: App {
                     .environmentObject(sessionManager)
             case .loggedIn:
                 TabView {
-                    HomeView()
-                        .tabItem {
-                            VStack{
-                                Image(systemName: "house")
-                                Text("Home")
-                            }
-                        }
+             
                     MessagingView()
                         .tabItem {
                             VStack{
@@ -46,6 +40,16 @@ struct FusionApp: App {
                                 Text("Messages")
                             }
                         }
+                    
+                    HomeView()
+                        .tabItem {
+                            VStack{
+                                Image(systemName: "house")
+                                Text("Home")
+                            }
+                        }
+                    
+                    
                     ProfileView()
                         .tabItem {
                             VStack{
@@ -53,6 +57,8 @@ struct FusionApp: App {
                                 Text("Account")
                             }
                         }
+                    
+                  
                     
                 }
                 .environmentObject(sessionManager)

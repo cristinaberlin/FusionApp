@@ -55,6 +55,8 @@
 		238051A92BCBEF100083DC89 /* MessagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051A82BCBEF100083DC89 /* MessagingViewModel.swift */; };
 		238051AB2BCBFAFC0083DC89 /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051AA2BCBFAFC0083DC89 /* MessageThread.swift */; };
 		238051AD2BCD7D6A0083DC89 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051AC2BCD7D6A0083DC89 /* ChatView.swift */; };
+		238051AF2BCEE4320083DC89 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051AE2BCEE4320083DC89 /* ChatViewModel.swift */; };
+		238051B12BCEE5CD0083DC89 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238051B02BCEE5CD0083DC89 /* Chat.swift */; };
 		239288602B20E57500F471BA /* FusionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2392885F2B20E57500F471BA /* FusionApp.swift */; };
 		239288622B20E57500F471BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239288612B20E57500F471BA /* ContentView.swift */; };
 		239288642B20E57700F471BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239288632B20E57700F471BA /* Assets.xcassets */; };
@@ -136,6 +138,8 @@
 		238051A82BCBEF100083DC89 /* MessagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingViewModel.swift; sourceTree = "<group>"; };
 		238051AA2BCBFAFC0083DC89 /* MessageThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
 		238051AC2BCD7D6A0083DC89 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		238051AE2BCEE4320083DC89 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		238051B02BCEE5CD0083DC89 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		2392885C2B20E57500F471BA /* Fusion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fusion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2392885F2B20E57500F471BA /* FusionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FusionApp.swift; sourceTree = "<group>"; };
 		239288612B20E57500F471BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -266,6 +270,7 @@
 				239618A12BB6DAB6008B285B /* SessionState.swift */,
 				238051A22BCAB3530083DC89 /* SwipedOnUser.swift */,
 				238051AA2BCBFAFC0083DC89 /* MessageThread.swift */,
+				238051B02BCEE5CD0083DC89 /* Chat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 				23F8D2AC2BB5989A0025582A /* RegistrationViewModel.swift */,
 				23F8D2AE2BB5A23E0025582A /* LoginViewModel.swift */,
 				238051A82BCBEF100083DC89 /* MessagingViewModel.swift */,
+				238051AE2BCEE4320083DC89 /* ChatViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -555,6 +561,7 @@
 				234E65572B3AE2E500C73C22 /* RegistrationView.swift in Sources */,
 				23E49A052B8256FC00B09548 /* SettingsRowView.swift in Sources */,
 				20FA159B2B9B884F00C835F0 /* GFGeoHash.m in Sources */,
+				238051AF2BCEE4320083DC89 /* ChatViewModel.swift in Sources */,
 				23E49A0E2B85233F00B09548 /* ImageLoaderViewModel.swift in Sources */,
 				20FA15992B9B884F00C835F0 /* GFGeoQueryBounds.m in Sources */,
 				23E49A122B87667600B09548 /* EditBioView.swift in Sources */,
@@ -566,6 +573,7 @@
 				23E499FD2B822D3B00B09548 /* ResetPasswordView.swift in Sources */,
 				23E49A032B824DCC00B09548 /* CustomLoadingView.swift in Sources */,
 				23E49A0C2B85143700B09548 /* CameraPicker.swift in Sources */,
+				238051B12BCEE5CD0083DC89 /* Chat.swift in Sources */,
 				23E49A162B8768B300B09548 /* PrimaryButton.swift in Sources */,
 				23DCFE1C2BAC81F8009A7AE0 /* StarShape.swift in Sources */,
 				234E659C2B3B226200C73C22 /* AuthViewModel.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CardStack
+import FirebaseAuth
 
 struct HomeView: View {
     
@@ -27,9 +28,19 @@ struct HomeView: View {
                                 }
                                 
                             }
-                            viewModel.swiped(user: user, isRight: true)
+                            guard let userID = Auth.auth().currentUser?.uid else {
+                                return
+                            }
+                            Task {
+                               await viewModel.swiped(user: user, isRight: true, currentUserID: userID)
+                            }
                         } else { //if user swiped left, putting in disliked database
-                            viewModel.swiped(user: user, isRight: false)
+                            guard let userID = Auth.auth().currentUser?.uid else {
+                                return
+                            }
+                            Task {
+                               await viewModel.swiped(user: user, isRight: false, currentUserID: userID)
+                            }
                         }
                     } content: { user, _, _ in
                         CardView(user: user,cardDidTap: {
@@ -51,8 +62,8 @@ struct HomeView: View {
                     }
                 }
             }
-            .alert("You are a match", isPresented: $viewModel.presentMatchingNotifiaction) {
-                Button("ok") {
+            .alert("You are a match!", isPresented: $viewModel.presentMatchingNotifiaction) {
+                Button("Done") {
                     
                 }
             } message: {
@@ -60,6 +71,14 @@ struct HomeView: View {
             }
 
         }
+        .onChange(of: sessionManager.sessionState, { oldValue, newValue in
+            if newValue == .loggedOut { 
+               
+            }
+            else {
+                viewModel.requestLocation()
+            }
+        })
         .onAppear(perform: {
             viewModel.requestLocation()
            // User.createMockLocationUsers()

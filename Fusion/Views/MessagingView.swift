@@ -15,9 +15,17 @@ struct MessagingView: View {
         NavigationStack {
             VStack {
                 List(viewModel.messageThreads) { messageThread in
-                    MessageRowView(messageThread: messageThread)
+                    Button(action: {
+                        viewModel.selectedMessageThread = messageThread
+                    }, label: {
+                        MessageRowView(messageThread: messageThread)
+                    })
+                   
                 }
             }
+            .navigationDestination(item: $viewModel.selectedMessageThread, destination: { messageThread in
+                ChatView(messageThread: messageThread)
+            })
             .navigationTitle("Messages")
         }
         .onChange(of: sessionManager.sessionState, { oldValue, newValue in
@@ -37,6 +45,6 @@ struct MessagingView: View {
     }
 }
 
-#Preview {
-    MessagingView()
-}
+//#Preview {
+//    MessagingView()
+//}

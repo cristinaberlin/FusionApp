@@ -33,14 +33,16 @@ class HomeViewModel: NSObject, ObservableObject {
         let threadID = UUID().uuidString
         var otherUserData = [
             "threadID": threadID,
-            "username": matchingUser.fullname
+            "username": matchingUser.fullname,
+            "otherUserID": userID
         ]
         if let avatar = matchingUser.avatar {
             otherUserData["avatar"] = avatar
         }
         var userData = [
             "threadID": threadID,
-            "username": currentUser.fullname
+            "username": currentUser.fullname,
+            "otherUserID": ourUserID
         ]
         if let avatar = currentUser.avatar {
             userData["avatar"] = avatar
@@ -53,16 +55,16 @@ class HomeViewModel: NSObject, ObservableObject {
         isLoading = true
         locationManager.requestLocation()
     }
-    
-    func swiped(user:User,isRight:Bool) {  //function for swiping right
-        guard let userID = Auth.auth().currentUser?.uid else {
-            return
-        }
-        Firestore.firestore().collection("swiped").addDocument(data: [
-            "user" : userID,
+   
+    @discardableResult
+    func swiped(user:User,isRight:Bool, currentUserID: String) async -> DocumentReference? {  //function for swiping right
+       
+       let documentReference = try? await Firestore.firestore().collection("swiped").addDocument(data: [
+            "user" : currentUserID,
             "swipedOn" : user.id,
             "isRight" : isRight
         ])
+        return documentReference
     }
     
     func isInRange(user: User, ofLocation location: CLLocation, range: Double) -> Bool {
@@ -171,6 +173,7 @@ extension HomeViewModel: CLLocationManagerDelegate {
                 print("swiped on users \(swipedOnUsers)")
                 Firestore.firestore().collection("users").getDocuments { snapshot, error in
                     if let error = error {
+                        print(error.localizedDescription) //prints our if an error has occurred and it describes it
                         self.isLoading = false
                         return
                     }
@@ -180,7 +183,7 @@ extension HomeViewModel: CLLocationManagerDelegate {
                     }
                     let allUsers = snapshot.documents.compactMap({ User(snapshot: $0) })
                     var eligibleUsers: [User] = [] //adds eligible users into this array for users who are in the area
-                    print("my location lat \(userLocation.coordinate.latitude) and long \(userLocation.coordinate.longitude) ")
+                   // print("my location lat \(userLocation.coordinate.latitude) and long \(userLocation.coordinate.longitude) ")
                     
                     let numberFormatter = NumberFormatter() //formatting km shown on profile
                     numberFormatter.maximumFractionDigits = 1
@@ -191,7 +194,7 @@ extension HomeViewModel: CLLocationManagerDelegate {
                             continue
                         }
                         
-                        if self.isInRange(user: user, ofLocation: userLocation, range: 1000000) {
+                        if self.isInRange(user: user, ofLocation: userLocation, range: 500000) { //500km radius
                             var mutableUser = user
                             let distance = self.getDistance(originLocation: userLocation, destinationLocation: CLLocation(latitude: user.l[0], longitude: user.l[1]))
                             let formattedDistanceAway = numberFormatter.string(from: (distance / 1000) as NSNumber ) ?? "0"  //adding in formatted distance
