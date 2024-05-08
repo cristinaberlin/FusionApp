@@ -116,33 +116,6 @@
         "revision" : "65e8f29b2d63c4e38e736b25c27b83e012159be8",
         "version" : "1.25.2"
       }
-    },
-    {
-      "identity" : "swift-snapshot-testing",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-snapshot-testing.git",
-      "state" : {
-        "revision" : "e7b77228b34057041374ebef00c0fd7739d71a2b",
-        "version" : "1.15.3"
-      }
-    },
-    {
-      "identity" : "swift-syntax",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
-      "state" : {
-        "revision" : "64889f0c732f210a935a0ad7cda38f77f876262d",
-        "version" : "509.1.1"
-      }
-    },
-    {
-      "identity" : "swiftui-cardstackview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dadalar/SwiftUI-CardStackView",
-      "state" : {
-        "revision" : "9b45ef54b9e7bfbee46fe4a5982ecf449ac2b47c",
-        "version" : "0.0.6"
-      }
     }
   ],
   "version" : 2

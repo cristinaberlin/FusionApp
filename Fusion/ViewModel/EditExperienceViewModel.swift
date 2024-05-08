@@ -9,6 +9,9 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
+/*
+ This EditExperienceViewModel handles the logic behind the EditExperienceView
+ */
 class EditExperienceViewModel: ObservableObject{
     @Published var experience = ""
     @Published var alertTitle = ""
@@ -16,7 +19,8 @@ class EditExperienceViewModel: ObservableObject{
     @Published var presentAlert = false
     let characterLimit = 450
     
-    func saveExperience() async -> Bool { //saving experience to firebase
+    //This function is responsible for saving and updating the user's experience to firebase
+    func saveExperience() async -> Bool {
         guard let userId = Auth.auth().currentUser?.uid else {
             alertTitle = "Error"
             alertMessage = "You need to be logged in to save experience"

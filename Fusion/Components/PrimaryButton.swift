@@ -3,12 +3,14 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 22/02/2024.
-// Created a primary button component that is re used across the app
+//
 
 import Foundation
 import SwiftUI
 
-
+/*
+ This is a reusable button
+ */
 struct PrimaryButton: ButtonStyle{
     func makeBody(configuration: Configuration) -> some View {
         configuration

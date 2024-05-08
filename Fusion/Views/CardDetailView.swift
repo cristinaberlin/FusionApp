@@ -7,22 +7,73 @@
 
 import SwiftUI
 
+/*
+ The CardVetailView is when you tap to see more details of the user's profile card
+ */
 struct CardDetailView: View {
     let user: User
+    var didLike: (_ isRight: Bool) -> Void
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
-        VStack(spacing:0){
-            AsyncImage(url: URL(string: user.avatar!)) { image in
-                image
-                    .resizable()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
-                    .aspectRatio(contentMode: .fill)
-                                } placeholder: {
-                                    Image("loading")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                }
-                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
-                                .ignoresSafeArea()
+        VStack(spacing: 0) {
+            ZStack {
+                AsyncImage(url: URL(string: user.avatar!)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+                        .aspectRatio(contentMode: .fill)
+                        .clipped()
+                } placeholder: {
+                    Image("loading")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+                .ignoresSafeArea()
+                VStack {
+                    Spacer()
+                    HStack {
+                        //This is the dislike button
+                        Button(action: {
+                            didLike(false)
+                            dismiss()
+                        }, label: {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.white)
+                                    .frame(width: 60)
+                                    .shadow(color: Color.black.opacity(0.4), radius: 2)
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 25, weight: .bold))
+                                .foregroundStyle(.red)
+                            }
+                        })
+                        .padding(.leading, 45)
+                   Spacer()
+                    //This is the like button
+                    Button(action: {
+                        didLike(true)
+                        dismiss()
+                    }, label: {
+                        ZStack {
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 60)
+                                .shadow(color: Color.black.opacity(0.4), radius: 2)
+                            Image(systemName: "hand.thumbsup.fill")
+                                 .font(.system(size: 25, weight: .bold))
+                                 .foregroundStyle(.primaryTheme)
+                        }
+                         
+                        })
+                    .padding(.trailing, 45)
+                    }
+                }
+                .offset(y: -45)
+            }
+            .frame(height: UIScreen.main.bounds.height * 0.5)
             VStack(alignment: .leading, spacing: 0){
                 HStack {
                     Text(user.fullname)
@@ -49,7 +100,7 @@ struct CardDetailView: View {
                 }
                 Spacer()
             }
-           .offset(y: -45) //changes the position of image
+           .offset(y: -30) //changes the position of image
             .padding(.horizontal)
             Spacer()
         }
@@ -57,5 +108,7 @@ struct CardDetailView: View {
 }
 
 #Preview {
-    CardDetailView(user: User.mockUsers[0])
+    CardDetailView(user: User.mockUsers[0]) { isRight in
+        
+    }
 }

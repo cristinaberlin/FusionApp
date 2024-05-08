@@ -8,16 +8,18 @@
 
 import SwiftUI
 
+/*
+ This is where is the user will sign up if they do not have an account
+ */
 struct RegistrationView: View {
     @StateObject var viewModel = RegistrationViewModel()
     @EnvironmentObject var sessionManager: SessionManager
-   // @EnvironmentObject var viewModel: AuthViewModel
     @Environment(\.dismiss) var dismiss
     
     
     var body: some View {
         VStack {
-            //image
+            //Logo image
             Image("Logo")
                 .resizable()
                 .scaledToFill()
@@ -34,11 +36,24 @@ struct RegistrationView: View {
                 InputView(text: $viewModel.fullname,
                           title: "Full Name",
                           placeholder: "Enter your name")
-                
-                Picker("Business Picker", selection: $viewModel.businessFieldSelection) {
-                    ForEach(BusinessFields.allCases) { businessField in
-                        Text(businessField.title)
+                VStack (alignment: .leading, spacing: 12) { //aligns text to left hand side
+                    HStack {
+                        Text("Business Field")
+                            .foregroundColor(Color(.darkGray))
+                            .fontWeight(.semibold)
+                            .font(.footnote)
+                        Spacer()
                     }
+                    HStack {
+                        Picker("Business Picker", selection: $viewModel.businessFieldSelection) {
+                            ForEach(BusinessFields.allCases) { businessField in
+                                Text(businessField.title)
+                                    .font(.system(size:14))
+                            }
+                        }
+                        Spacer()
+                    }
+                    Divider()
                 }
                 
                 InputView(text: $viewModel.password,
@@ -52,7 +67,8 @@ struct RegistrationView: View {
                               placeholder: "Confirm your password",
                               isSecureField: true)
                     
-                    if !viewModel.password.isEmpty && !viewModel.confirmPassword.isEmpty { //making sure both fields have text and as filling out form, If both fields are equal a checkmark will show if not an xmark will appear.
+                    //making sure both fields have text and as filling out form, If both fields are equal a checkmark will show if not an xmark will appear.
+                    if !viewModel.password.isEmpty && !viewModel.confirmPassword.isEmpty {
                         if viewModel.password == viewModel.confirmPassword {
                             Image(systemName: "checkmark.circle.fill")
                                 .imageScale(.large)
@@ -73,7 +89,6 @@ struct RegistrationView: View {
             
             //sign in button
             Button {
-                print("Sign User Up..") //prints in console
                 Task{
                     let result = try await viewModel.createUser()
                     if result {

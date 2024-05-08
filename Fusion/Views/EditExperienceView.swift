@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/*
+ This is where the user can edit their experience, it is a seperate view
+ */
 struct EditExperienceView: View {
     @StateObject var viewModel = EditExperienceViewModel()
     @Binding var currentExperience: String?

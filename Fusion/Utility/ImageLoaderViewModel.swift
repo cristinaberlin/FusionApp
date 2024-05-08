@@ -3,14 +3,17 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 20/02/2024.
-// SwiftUI model that manages the process of selecting, loading and uploading of image for profile
-// Inspired by: https://medium.com/@jakir/access-the-camera-and-photo-library-in-swiftui-0351a3c280f5
+//
+//  Inspired by: https://medium.com/@jakir/access-the-camera-and-photo-library-in-swiftui-0351a3c280f5
 
 
 import Foundation
 import PhotosUI
 import SwiftUI
 
+/*
+ The ImageLoaderViewModel is responsable allowing a user to pick a photo from the user library to show as their user avatar
+ */
 enum ImageState {
     case empty
     case loading(Progress)

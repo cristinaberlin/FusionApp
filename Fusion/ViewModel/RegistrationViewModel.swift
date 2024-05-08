@@ -4,12 +4,16 @@
 //
 //  Created by Cristina Berlinschi on 20/03/2024.
 //
+//  Inspired by: https://www.youtube.com/watch?v=QJHmhLGv-_0&ab_channel=AppStuffc by App Stuff
 
 import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestoreSwift
 
+/*
+ The RegistrationViewModel is responsible behind the logic for the RegistrationView
+ */
 class RegistrationViewModel: ObservableObject{
     @Published var userSession : FirebaseAuth.User? //tells us if a user is logged in or not, user from database
     @Published var currentUser: User? //user database model
@@ -22,7 +26,8 @@ class RegistrationViewModel: ObservableObject{
     @Published var password = ""
     @Published var confirmPassword = ""
     
-    func createUser() async throws -> Bool { //creates a user in background with firebase
+    //This function is responsible for creating a user only if their email and password credentials are valid
+    func createUser() async throws -> Bool {
         isLoading = true
         
         do {
@@ -41,18 +46,20 @@ class RegistrationViewModel: ObservableObject{
             return false
         }
     }
-    
+    //This function is responsible for validating if a user's email is in the correct format
     func isEmailValid() -> Bool {
         return !email.isEmpty
         && email.contains("@")
     }
     
+    //This function is responsible for validating that the user's password is in the correct format
     func isPasswordValid() -> Bool {
         return !password.isEmpty
         && password.count > 5
         && confirmPassword == password
     }
     
+    //This function is responsible for validating that the user's name is in the correct format
     func isFullnameValid() -> Bool {
         return !fullname.isEmpty
         && fullname.count > 3

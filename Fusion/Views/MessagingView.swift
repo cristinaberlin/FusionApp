@@ -3,10 +3,14 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 1/04/2024.
-//
+//  Inspired by: https://github.com/rick2785/SwiftUIFirebaseChat
 
 import SwiftUI
 
+/*
+ This is where the user sees a summary of the users who have mutually swiped right
+ The functionality here was inspired by: https://github.com/rick2785/SwiftUIFirebaseChat
+ */
 struct MessagingView: View {
     @StateObject var viewModel = MessagingViewModel()
     @EnvironmentObject var sessionManager: SessionManager

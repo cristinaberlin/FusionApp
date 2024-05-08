@@ -8,6 +8,9 @@
 import Foundation
 import FirebaseFirestore
 
+/*
+ This model describes a chat message
+ */
 struct Chat: Identifiable {
     let id: String
     let userID: String

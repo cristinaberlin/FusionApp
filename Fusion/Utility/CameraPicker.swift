@@ -3,13 +3,16 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 20/02/2024.
-// Code to access phones camera funcationality
+//  
 //  Inspired by: https://medium.com/@jakir/access-the-camera-and-photo-library-in-swiftui-0351a3c280f5
 
 import Foundation
-
 import SwiftUI
 
+
+/*
+ The CameraPicker is responsable bringing up the user's iphone camera to take photos for their user's profile
+ */
 struct CameraPicker: UIViewControllerRepresentable { //importing controller from ui kit to swift ui
     
     @Environment(\.presentationMode) private var presentationMode

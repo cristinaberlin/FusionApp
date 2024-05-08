@@ -8,6 +8,9 @@
 import Foundation
 import FirebaseFirestore
 
+/*
+ This model describes a message thread
+ */
 struct MessageThread: Identifiable, Hashable {
     let id: String
     let username: String

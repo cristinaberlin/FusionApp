@@ -9,6 +9,9 @@ import SwiftUI
 import Foundation
 import Firebase
 
+/*
+ This model describes possible errors that can arise from login and signup
+ */
 enum AuthError: Error { //file for when invalid email/password etc is inputted an error is shown, error catcher
     case invalidEmail
     case invalidPassword

@@ -8,6 +8,9 @@
 
 import SwiftUI
 
+/*
+ The InputView is a reusable view used in the LoginView and SignUpView for fields that require text entry
+ */
 struct InputView: View {
     
     @Binding var text: String

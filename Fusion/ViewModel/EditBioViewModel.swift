@@ -9,6 +9,9 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
+/*
+ This EditBioViewModel is the logic behind EditBioView, its major responsibility is to update the user's bio
+ */
 class EditBioViewModel: ObservableObject{
     @Published var bio = ""
     @Published var alertTitle = ""
@@ -16,6 +19,7 @@ class EditBioViewModel: ObservableObject{
     @Published var presentAlert = false
     let characterLimit = 300
     
+    //This function is responsible for updating user's bio
     func saveBio() async -> Bool { //saving bio to firebase
         guard let userId = Auth.auth().currentUser?.uid else {return false}
         do {

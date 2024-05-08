@@ -10,18 +10,23 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var sessionManager: SessionManager
     @StateObject private var viewModel = ProfileViewModel()
+    //the imageLoaderViewModel is used to help with retreiving images from the user's photo library for their avatar
     @StateObject private var imageLoaderViewModel = ImageLoaderViewModel()
-    @State private var businessFieldSelection: BusinessFields = .marketing //default that is shown in picker if no prior selection
-    @AppStorage("darkMode") var darkMode = false //boolean that stores the dark mode theme of the app
+    @State private var businessFieldSelection: BusinessFields = .marketing
+    
     
     var body: some View {
-        NavigationStack { //allows user to navigate between pages
+        //A NavigationStack allows a user to navigate between pages https://developer.apple.com/documentation/swiftui/navigationstack
+        NavigationStack {
             ZStack {
                 VStack {
+                    //I checked to see if user is logged in before displaying their details in the ProfileView
                     if let user = sessionManager.currentUser {
                         List {
-                            Section { //first section, displays initials, image, name and email
+                            Section {
                                 HStack {
+                                    // This displays the user's profile if they a profile image
+                                    // I asynchrounously loaded the image as it is from a remote URL https://www.swiftanytime.com/blog/asyncimage-in-swiftui
                                     AsyncImage(url: viewModel.avatar) { image in
                                         image.resizable()
                                             .aspectRatio(contentMode: .fill)
@@ -35,8 +40,8 @@ struct ProfileView: View {
                                             .background(Color(.systemGray3))
                                             .clipShape(Circle())
                                     }
+                                    //An onTapGesture is called when the image is tapped and this brings up a menu of options for updating user's avatar
                                     .onTapGesture {
-                                        print("did tap")
                                         viewModel.showImageOptions = true
                                     }
                                     
@@ -53,7 +58,8 @@ struct ProfileView: View {
                                     Spacer()
                                 }
                             }
-                            Section("Bio") { //section for bio
+                            //section for bio, when clicked this presents a new view where the user can update their bio
+                            Section("Bio") {
                                 Button {
                                     viewModel.presentEditBio = true
                                 } label: {
@@ -61,16 +67,16 @@ struct ProfileView: View {
                                 }
 
                             }
-                            Section("Business Field") { //User can choose from business fields
+                            //This is where the user can see their current business field selection and update it
+                            Section("Business Field") {
                                 Picker("Business Field", selection: $businessFieldSelection) {
                                     ForEach(BusinessFields.allCases) { businessField in
                                         Text(businessField.title)
                                     }
                                 }
-                               // .pickerStyle(.wheel)
                             }
-                            
-                            Section("Company") { //User can add company they work at
+                            //The user can add the company they work at
+                            Section("Company") {
                                 VStack {
                                     TextField("Add Company Here", text: $viewModel.company)
                                         .toolbar {
@@ -87,7 +93,8 @@ struct ProfileView: View {
                                         }
                                 }
                             }
-                            Section("Experience") { //section for experience
+                            //section for experience, when clicked a new view is presented and user can update their experience
+                            Section("Experience") {
                                 Button {
                                     viewModel.presentEditExperience = true
                                 } label: {
@@ -95,8 +102,8 @@ struct ProfileView: View {
                                 }
 
                             }
-                            
-                            Section("General") { //here I have version of the app and darkmode/lightmode switch
+                            //This section displays version of the app
+                            Section("General") {
                                 HStack {
                                     SettingsRowView(imageName: "gear.circle",
                                                     title: "Version",
@@ -108,27 +115,16 @@ struct ProfileView: View {
                                         .font(.system(size: 14))
                                         .foregroundColor(.gray)
                                 }
-                                HStack {
-                                    Text(darkMode ? "Light Mode" : "Dark Mode")
-                                    Spacer()
-                                    Toggle("", isOn: $darkMode.animation(.easeInOut))
-                                        .frame(width: 90, height: 10, alignment: .top)
-                                        .toggleStyle(MyToggleStyle())
-                                        .padding(.bottom, 16)
-                                                   
-                                    
-                                  
-                                }
-                                .frame(height:50)
+                              
                             }
-                            Section("Account") { //buttons for signing out and deleting account
+                            //These are the buttons for signing out and deleting account
+                            Section("Account") {
                                 Button {
                                     sessionManager.signout()
                                 } label: {
-                                Text("Sign out")
                                     SettingsRowView(imageName: "arrow.left.circle.fill",
                                                     title: "Sign Out",
-                                                    tintColor: Color(.systemRed))
+                                                  tintColor: Color(.systemRed))
                                 }
                                 
                                 Button {
@@ -146,7 +142,7 @@ struct ProfileView: View {
                     
                     
                 }
-               
+               //this presents a loading view when user uppdates anything on their profile
                 if sessionManager.isLoading {
                     CustomProgressView()
                 }
@@ -160,13 +156,14 @@ struct ProfileView: View {
                                 .padding(.horizontal)
                         }
                     }
-                    .ignoresSafeArea() 
+                    .ignoresSafeArea()
                 }
             }
             .onTapGesture(perform: { //dismisses keyboard
               hideKeyboard()
             })
-            .navigationTitle("Profile") //Shown at the top of the screen
+            //Title is shown at the top of the screen
+            .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.large)
             .navigationDestination(isPresented: $viewModel.presentEditBio, destination: {
                 EditBioView(currentBio: $viewModel.bio)
@@ -174,7 +171,8 @@ struct ProfileView: View {
             .navigationDestination(isPresented: $viewModel.presentEditExperience, destination: {
                 EditExperienceView(currentExperience: $viewModel.experience)
             })
-            .alert(viewModel.alertTitle, isPresented: $viewModel.showAlert, actions: { //error handling in case image cant upload an error will appear
+            //Error handling in case image cant upload an error will appear
+            .alert(viewModel.alertTitle, isPresented: $viewModel.showAlert, actions: {
                 Button {
                     
                 } label: {

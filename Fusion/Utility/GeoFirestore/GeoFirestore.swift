@@ -1,7 +1,7 @@
 //
 //  GeoFirestore.swift
 //  Fusion
-// Created by Cristina Berlinschi on 08/03/2024.
+//  Created by Cristina Berlinschi on 08/03/2024.
 //
 
 import Foundation
@@ -9,6 +9,9 @@ import CoreLocation
 import FirebaseCore
 import FirebaseFirestore
 
+/*
+ This is taken from a library that is responsable for geohashing the user's location coordinates https://github.com/imperiumlabs/GeoFirestore-iOS
+ */
 public extension GeoPoint {
     class func geopointWithLocation(location: CLLocation) -> GeoPoint {
         return GeoPoint(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)

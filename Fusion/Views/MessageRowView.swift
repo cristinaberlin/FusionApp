@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/*
+ This is a reusable view to display a message thread row in the messaging view
+ */
 struct MessageRowView: View {
     let messageThread: MessageThread
     var body: some View {

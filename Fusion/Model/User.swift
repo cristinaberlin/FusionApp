@@ -4,7 +4,7 @@
 //
 //  Created by Cristina Berlinschi on 20/12/2023.
 //
-// User model
+//
 
 import Foundation
 import CoreLocation
@@ -12,7 +12,10 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
 
-struct User: Identifiable, Codable, Equatable, Hashable { 
+/*
+ The UserModel describes all the attributes of a user in the app
+ */
+struct User: Identifiable, Codable, Equatable, Hashable {
     let id: String
     let fullname: String
     let email: String
@@ -86,8 +89,8 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     
 }
 
-
-extension User{ //creating mock user
+//This extension creates mock users for testing purposes
+extension User{
     static func createMockLocationUsers() {
         func upload(image: UIImage) async -> URL? { //function uploads the avatar to firebase and will be shown in app
                 guard let userId = Auth.auth().currentUser?.uid else { return nil }

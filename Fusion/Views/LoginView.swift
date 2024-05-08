@@ -9,12 +9,16 @@
 
 import SwiftUI
 
+/*
+ This is where logs in app if they have an existing account
+ */
 struct LoginView: View {
     @StateObject var viewModel = LoginViewModel()
     @EnvironmentObject var sessionManager: SessionManager
     
+    
     var body: some View {
-        NavigationStack { //  Navigation stack to move back and forth between pages
+        NavigationStack { //Navigation stack to move back and forth between pages
             VStack{
                 //image
                 Image("Logo")
@@ -35,17 +39,6 @@ struct LoginView: View {
                               placeholder: "Enter your password",
                               isSecureField: true)
                     
-                    NavigationLink { //Link for reset password view
-                        ResetPasswordView()
-                            .navigationBarHidden(true)
-                    } label: {
-                        Text("Forgot Password?")
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(.blue)
-            
-                    }
-                    .padding(.bottom)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
                     
                 }
                 .padding(.horizontal)
@@ -74,12 +67,13 @@ struct LoginView: View {
                 
                 Spacer()
                 
-                //sign up button
                 
-                NavigationLink { //creates a link between Registration and Login
+                //creates a link between RegistrationView and LoginView
+                NavigationLink {
                     RegistrationView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
+                    //sign up button
                     HStack (spacing: 4) {
                         Text("Don't have an account?")
                         Text("Sign up")

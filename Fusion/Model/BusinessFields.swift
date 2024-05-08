@@ -3,12 +3,15 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 19/02/2024.
-//  Add in scrolling feature to view all business fields
+//  
 
 import Foundation
 
+/*
+ This Model describes all the possible business fields
+ */
 enum BusinessFields: Int, CaseIterable, Identifiable, Codable { //int gives each business field a number
-    case accounting, agriculture, automotive, consultant, education, energy, environmental, fashion, finance, food, healthcare, hospitality, it, law, logistics, manufacturing, marketing, media, music, realestate, retail, sports, technology, transportation //all the businessfields
+    case accounting, agriculture, automotive, consultant, education, energy, environmental, fashion, finance, food, healthcare, hospitality, it, law, logistics, manufacturing, marketing, media, music, realestate, retail, sports, technology, transportation //all the businessfields - 0-23 in array
     
     var id: Self {
         self
@@ -49,7 +52,7 @@ enum BusinessFields: Int, CaseIterable, Identifiable, Codable { //int gives each
         case .manufacturing:
             return "Manufacturing"
         case .marketing:
-            return "Marketing"
+            return "Marketing" 
         case .media:
             return "Media"
         case .music:

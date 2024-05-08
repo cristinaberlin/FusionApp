@@ -3,11 +3,14 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 18/02/2024.
-// Come back and change to upload progress bar for uploading an image
+//
 //
 
 import SwiftUI
 
+/*
+ This CustomLoadingView is a reusable view that is shown everytime a loading screen appears in the app
+ */
 struct CustomProgressView: View {
     var body: some View {
         ProgressView()

@@ -3,11 +3,14 @@
 //  Fusion
 //
 //  Created by Cristina Berlinschi on 22/02/2024.
-// When user clicks into bio to edit they will be brought to this page where user can input bio
-// Add character limit !
+//
+//
 
 import SwiftUI
 
+/*
+ When a user clicks into the bio to edit they will be brought to this view where user can input bio 
+ */
 struct EditBioView: View {
     
     @StateObject var viewModel = EditBioViewModel()
