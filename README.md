@@ -8,3 +8,6 @@ I created a platform to connect business professionals, entrepreneurs, investors
 
 ![Screenshot](https://github.com/cristinaberlin/FusionApp/blob/main/Github.jpeg)
 
+## License
+
+Fusion app is released under the MIT license. [See license](https://github.com/cristinaberlin/FusionApp/blob/main/LICENSE) for details.
